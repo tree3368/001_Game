@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Generator : ObjectPool
+public class Generator : MonoBehaviour
 {
     [SerializeField] private Template[] _templates;
+    [SerializeField] private ObjectPool _objectPool;
     [SerializeField] private float _secondsBetweenSpawn;
 
     private float _elapsedTime = 1;
@@ -13,7 +14,7 @@ public class Generator : ObjectPool
     private void Start()
     {
         for (int i = 0; i < _templates.Length; i++)
-            Initialize(_templates[i]);
+            _objectPool.Initialize(_templates[i]);
     }
 
     private void Update()
@@ -27,7 +28,7 @@ public class Generator : ObjectPool
 
         if (_elapsedTime > _secondsBetweenSpawn)
         {
-            if (TryGetObject(out Template template))
+            if (_objectPool.TryGetObject(out Template template))
             {
                 _elapsedTime = 0;               
                 MoveItem(template);
