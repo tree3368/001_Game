@@ -5,15 +5,15 @@ using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
-    private int _numberCoins = 0;
+    private int _coins = 0;
 
-    public event UnityAction<int> NumberCoinsChanged;
+    public event UnityAction<int> CoinsChanged;
     public event UnityAction Crashed;
 
-    public void IncreaseCoinCount()
+    public void PickUpCoin()
     {
-        _numberCoins++;
-        NumberCoinsChanged?.Invoke(_numberCoins);
+        _coins++;
+        CoinsChanged?.Invoke(_coins);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Coin coin))
         {
             coin.gameObject.SetActive(false);
-            IncreaseCoinCount();
+            PickUpCoin();
         }
     }
 

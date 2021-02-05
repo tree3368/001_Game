@@ -4,8 +4,8 @@ using UnityEngine;
 
 class Spike : Template
 {
-    public override void AssignSpawnPoint(Transform[] spawnPoints)
+    public override void AssignSpawnPoint()
     {
-        spawnPoint = spawnPoints[0];
+        SpawnPoint = FindObjectOfType<Spike>().transform;
     }
 }

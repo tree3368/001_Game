@@ -18,6 +18,7 @@ public class ObjectPool : MonoBehaviour
             Template spawned = Instantiate(prefab, _container.transform);
             spawned.gameObject.SetActive(false);
             _pool.Add(spawned);
+            spawned.AssignSpawnPoint();
         }
     }
 

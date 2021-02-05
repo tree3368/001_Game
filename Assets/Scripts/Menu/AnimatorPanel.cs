@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class AnimationCreator : MonoBehaviour
+public class AnimatorPanel : MonoBehaviour
 {
+    private const string _triggerButton = "Click";
+
     private Animator _animator;
 
     private void Start()
@@ -14,6 +16,6 @@ public class AnimationCreator : MonoBehaviour
 
     public void ShowCreator()
     {
-        _animator.SetTrigger("Click");
+        _animator.SetTrigger(_triggerButton);
     }
 }

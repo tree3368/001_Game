@@ -4,14 +4,12 @@ using UnityEngine;
 
 public abstract class Template : MonoBehaviour
 {
-    [SerializeField] protected int quantity;
-    [SerializeField] protected float offsetX;
+    [SerializeField] private int quantity;
+    [SerializeField] private float offsetX;
 
-    protected Transform spawnPoint;
-
+    public Transform SpawnPoint { get; protected set; }
     public int Quantity => quantity;
     public float OffsetX => offsetX;
-    public Transform SpawnPoint => spawnPoint;
 
-    public abstract void AssignSpawnPoint(Transform[] spawnPoints);
+    public abstract void AssignSpawnPoint();
 }

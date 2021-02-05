@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 class Coin : Template
 {
-    public override void AssignSpawnPoint(Transform[] spawnPoints)
+    public override void AssignSpawnPoint()
     {
-        spawnPoint = spawnPoints[1];
+        SpawnPoint = FindObjectOfType<Coin>().transform;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
