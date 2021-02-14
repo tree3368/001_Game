@@ -5,41 +5,32 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    [SerializeField] private Template[] _templates;
+    [SerializeField] private Template _template;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeField] private ObjectPool _objectPool;
-    [SerializeField] private float _secondsBetweenSpawn;
-
-    private float _elapsedTime = 1;
 
     private void Start()
     {
-        for (int i = 0; i < _templates.Length; i++)
-            _objectPool.Initialize(_templates[i]);
+        _objectPool.Initialize(_template);
     }
 
     private void Update()
     {
-        ChangeTime();
+        TryGetObject();
     }
 
-    private void ChangeTime()
+    private void TryGetObject()
     {
-        _elapsedTime += Time.deltaTime;
-
-        if (_elapsedTime > _secondsBetweenSpawn)
+        if (_objectPool.TryGetObject(out Template template))
         {
-            if (_objectPool.TryGetObject(out Template template))
-            {
-                _elapsedTime = 0;               
-                MoveItem(template);
-            }
+            MoveItem(template);
         }
     }
 
     private void MoveItem(Template item)
     {
-        item.transform.position = new Vector3(item.SpawnPoint.position.x, item.SpawnPoint.position.y, transform.position.z);
+        item.transform.position = _spawnPoint.position;
         item.gameObject.SetActive(true);
-        item.SpawnPoint.position += new Vector3(item.OffsetX, 0);
+        _spawnPoint.position += new Vector3(item.OffsetX, 0, 0);
     }
 }

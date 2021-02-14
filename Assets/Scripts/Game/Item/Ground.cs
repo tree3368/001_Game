@@ -4,8 +4,4 @@ using UnityEngine;
 
 class Ground : Template
 {
-    public override void AssignSpawnPoint()
-    {
-        SpawnPoint = FindObjectOfType<Ground>().transform;
-    }
 }

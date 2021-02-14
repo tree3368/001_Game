@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    [SerializeField] private int _capacity;
+
     private List<Template> _pool = new List<Template>();
 
     public List<Template> Pool => _pool;
 
     public void Initialize(Template prefab)
     {
-        for (int i = 0; i < prefab.Quantity;  i++)
+        for (int i = 0; i < _capacity; i++)
         {
             Template spawned = Instantiate(prefab, transform);
             spawned.gameObject.SetActive(false);
             _pool.Add(spawned);
-            spawned.AssignSpawnPoint();
         }
     }
 

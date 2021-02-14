@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectBreaker : MonoBehaviour
 {
-    [SerializeField] private ObjectPool _objectPool;
+    [SerializeField] private ObjectPool[] _objectPools;
     [SerializeField] private float _cameraOffsetX;
 
     private Camera _camera;
@@ -16,13 +16,16 @@ public class ObjectBreaker : MonoBehaviour
 
     private void Update()
     {
-        DisableObjectAbroadScreen();
+        foreach (var objectPool in _objectPools)
+        {
+            DisableObjectAbroadScreen(objectPool);
+        }
     }
 
-    private void DisableObjectAbroadScreen()
+    private void DisableObjectAbroadScreen(ObjectPool objectPool)
     {
         Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector2(_cameraOffsetX, 0));
-        foreach (Template item in _objectPool.Pool)
+        foreach (Template item in objectPool.Pool)
         {
             if (item.gameObject.activeSelf == true)
             {
